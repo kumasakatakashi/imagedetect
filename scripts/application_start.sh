@@ -1,2 +1,2 @@
 #!/bin/bash
-service php-fpm start
+# service php-fpm start
