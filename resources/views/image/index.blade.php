@@ -9,7 +9,7 @@
             <div class="card-body">
                 <!-- エラーメッセージ -->
                 @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible">
+                <div class="alert alert-danger alert-dismissible" id="alertfadeout">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -67,6 +67,11 @@ $(function(){
     $('input[id=lefile]').change(function(){
         $('input[id=photoCover]').val($(this).val().replace("C:\\fakepath\\", ""));
     });    
+});
+$(document).ready(function(){
+    $(window).load(function(){
+        window.setTimeout("$('#alertfadeout').fadeOut()", 5000);
+    });
 });
 </script>
 @endsection
