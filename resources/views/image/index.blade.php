@@ -67,8 +67,6 @@ $(function(){
     $('input[id=lefile]').change(function(){
         $('input[id=photoCover]').val($(this).val().replace("C:\\fakepath\\", ""));
     });    
-});
-$(document).ready(function(){
     $(window).load(function(){
         window.setTimeout("$('#alertfadeout').fadeOut()", 5000);
     });
