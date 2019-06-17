@@ -69,7 +69,7 @@ $(function(){
     });    
 });
 $(document).ready(function(){
-    $(window).load(function(){
+    $(window).on('load', function(){
         window.setTimeout("$('#alertfadeout').fadeOut()", 5000);
     });
 });
