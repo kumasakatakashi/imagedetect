@@ -13,5 +13,7 @@
 Auth::routes();
 Route::get('/', 'ImageController@index');
 Route::post('upload', 'ImageController@upload');
+Route::get('upload', 'ImageController@index'); //エラー用
 Route::post('detect', 'ImageController@detect');
+Route::get('detect', 'ImageController@index'); //エラー用
 Route::redirect('/home', '/');
