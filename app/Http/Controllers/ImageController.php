@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UploadImageRequest;
 use App\Support\Api\GoogleVisionApi;
 
 class ImageController extends Controller
@@ -18,21 +18,8 @@ class ImageController extends Controller
      * @param Request $request
      * @return type
      */
-    public function upload(Request $request)
+    public function upload(UploadImageRequest $request)
     {
-        $this->validate($request, [
-            'file' => [
-                'required',
-                'file',
-                'image',
-                'mimes:jpeg,png,gif',
-            ]
-        ]);
-        
-        if (!$request->file('file')->isValid()) {
-            return back()->withInput()->withErrors();
-        }
-
         $path = $request->file->store('public');
         return view('image.index')->with('filename', basename($path));
     }
