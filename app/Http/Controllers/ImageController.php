@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UploadImageRequest;
 use App\Http\Requests\DetectImageRequest;
 use App\Support\Api\GoogleVisionApi;
@@ -23,8 +24,8 @@ class ImageController extends Controller
     public function upload(UploadImageRequest $request)
     {
         // subfolder:none disk:depends on .env(FILESYSTEM_DRIVER)
-        $path = $request->file->store('');
-        return view('image.index')->with('filename', basename($path));
+        $filename = Storage::putFile('', $request->file);
+        return view('image.index')->with('filepath', Storage::url($filename));
     }
     
     /**
@@ -35,14 +36,14 @@ class ImageController extends Controller
      */
     public function detect(DetectImageRequest $request)
     {
-        $image_path = $request->input('imagepath');
+        $filepath = $request->input('filepath');
 
         // OCR実行 by GoogleVisionAPI
         $api = new GoogleVisionApi();
-        $text = $api->document_text_detection($image_path);
+        $text = $api->document_text_detection($filepath);
 
         return view('image.index')->with([
-            'filename' => basename($image_path),
+            'filepath' => $filepath,
             'result_text' => $text
         ]);
     }

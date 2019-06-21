@@ -24,7 +24,7 @@ class DetectImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagepath' => [
+            'filepath' => [
                 'required',
             ],
         ];
@@ -40,8 +40,8 @@ class DetectImageRequest extends FormRequest
         $validator->after(function ($validator) {
             if (false == $validator->failed()) {
                 // check file exists
-                if (false == @file_get_contents($this->input('imagepath'), NULL, NULL, 0, 1)){
-                    $validator->errors()->add('imagepath', '画像ファイルが存在しません。');
+                if (false == @file_get_contents($this->input('filepath'), NULL, NULL, 0, 1)){
+                    $validator->errors()->add('filepath', '画像ファイルが存在しません。');
                 }
             }
         });
