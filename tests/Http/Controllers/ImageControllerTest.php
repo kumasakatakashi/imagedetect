@@ -29,7 +29,7 @@ class ImageControllerTest extends TestCase
         
         $response->assertStatus(200);
         $response->assertViewIs('image.index');
-        $response->assertViewHas('filename');
+        $response->assertViewHas('filepath');
         
         Storage::disk($disk)->assertExists($file->hashName());
     }
