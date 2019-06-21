@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UploadImageRequest;
+use App\Http\Requests\DetectImageRequest;
 use App\Support\Api\GoogleVisionApi;
 
 class ImageController extends Controller
@@ -32,7 +33,7 @@ class ImageController extends Controller
      * @param Request $request
      * @return type
      */
-    public function detect(Request $request)
+    public function detect(DetectImageRequest $request)
     {
         $image_path = $request->input('imagepath');
 
