@@ -25,7 +25,7 @@ class ImageController extends Controller
     {
         // subfolder:none disk:depends on .env(FILESYSTEM_DRIVER)
         $filename = Storage::putFile('', $request->file);
-        return view('image.index')->with('filepath', Storage::url($filename));
+        return view('image.index')->with('filepath', $filename);
     }
     
     /**
