@@ -40,14 +40,14 @@
                 <!-- アップロード画像表示 -->
                 @isset($filepath)
                 <hr>
-                <a href="{{ url($filepath) }}" data-lightbox="detectimage">
-                    <img src="{{ url($filepath) }}" width="200" height="150" />
+                <a href="{{ Storage::url($filepath) }}" data-lightbox="detectimage">
+                    <img src="{{ Storage::url($filepath) }}" width="200" height="150" />
                 </a>
                 <!-- OCR認識フォーム -->
                 <hr>
                 {!! Form::open(['url' => '/detect', 'method' => 'post', 'files' => false]) !!}
                 <div class="form-group">
-                    {!! Form::hidden('filepath', url($filepath)) !!}
+                    {!! Form::hidden('filepath', Storage::url($filepath)) !!}
                     {!! Form::submit('文字認識', ['class' => 'btn btn-danger']) !!}
                 </div>
                 {!! Form::close() !!}
