@@ -21,7 +21,8 @@ class ImageController extends Controller
      */
     public function upload(UploadImageRequest $request)
     {
-        $path = $request->file->store('public');
+        // subfolder:none disk:depends on .env(FILESYSTEM_DRIVER)
+        $path = $request->file->store('');
         return view('image.index')->with('filename', basename($path));
     }
     
