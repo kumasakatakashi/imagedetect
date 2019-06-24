@@ -23,8 +23,8 @@ class ImageController extends Controller
      */
     public function upload(UploadImageRequest $request)
     {
-        // subfolder:none disk:depends on .env(FILESYSTEM_DRIVER)
-        $filename = Storage::putFile('', $request->file);
+        // subfolder:uploads / disk:depends on .env(FILESYSTEM_DRIVER) / accessable:public
+        $filename = Storage::putFile('uploads', $request->file, 'public');
         return view('image.index')->with('filepath', Storage::url($filename));
     }
     
