@@ -31,6 +31,6 @@ class ImageControllerTest extends TestCase
         $response->assertViewIs('image.index');
         $response->assertViewHas('filepath');
         
-        Storage::disk($disk)->assertExists($file->hashName());
+        Storage::disk($disk)->assertExists('uploads/'.$file->hashName());
     }
 }
