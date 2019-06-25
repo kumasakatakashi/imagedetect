@@ -41,15 +41,16 @@ class ImageControllerTest extends TestCase
     public function testDetect()
     {
         // テスト用にValidator(ファイル存在チェック)をモック化
+        // inputの結果をstringで何かしら値を返す必要がある。
+        // detectメソッドのタイプヒンティングに
+        // stringを指定しており、nullが渡るとエラーになるため
         $mock_request = m::mock('overload:\App\Http\Requests\DetectImageRequest');
-        $mock_request->shouldReceive('input')
-                ->once();
-        
-        $mock_googleapi = m::mock('overload:\App\Support\Api\GoogleVisionApi');
-        $mock_googleapi->shouldReceive('document_text_detection')
-                ->once()
-                ->with(\Mockery::any())
-                ->andReturn('test');
+        $mock_request->shouldReceive('input')->once()->andReturn('/path/test.jpg');
+
+        // ダミーのサービスクラスへ切り替え
+        \App::singleton(\App\Services\OcrService::class, function (){
+            return new OcrServiceDummy();
+        });
         
         $response = $this->post('detect', [
             'filepath' => '/path/to/test.jpg',
@@ -58,5 +59,12 @@ class ImageControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('image.index');
         $response->assertViewHas('result_text');
+    }
+}
+
+class OcrServiceDummy implements \App\Services\OcrService
+{
+    public function detect(string $image_path) {
+        return 'ダミーです';
     }
 }
