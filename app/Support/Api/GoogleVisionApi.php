@@ -43,8 +43,8 @@ class GoogleVisionApi
             ],
         ]);
         $array_json = json_decode($response->getBody(), true);
-        $text = $array_json["responses"]["0"]["textAnnotations"]["0"]["description"];
-        
+        $result = $array_json["responses"]["0"];
+        $text = isset($result["textAnnotations"]) ? $result["textAnnotations"]["0"]["description"] : "";
         return $text;
     }
 }
