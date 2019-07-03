@@ -12,7 +12,7 @@ use App\Services\OcrService;
 class ImageController extends Controller
 {
     /**
-     * @var App\Services\OcrServiceContract
+     * @var App\Services\OcrService
      */
     protected $ocrService;
     
