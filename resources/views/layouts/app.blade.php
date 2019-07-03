@@ -21,6 +21,19 @@
     <!-- Styles -->
     <link href="{{ asset('css/lightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+    $(document).ready(function(){
+        $(window).on('load', function(){
+            window.setTimeout("$('#alertfadeout').fadeOut()", 3000);
+        });
+    });
+    $(function(){
+        $('input[id=lefile]').change(function(){
+            $('input[id=photoCover]').val($(this).val().replace("C:\\fakepath\\", ""));
+        });    
+    });
+    </script>
 </head>
 <body>
     <div id="app">
@@ -81,9 +94,14 @@
 -->
             </div>
         </nav>
-
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
