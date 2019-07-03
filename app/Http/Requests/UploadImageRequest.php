@@ -29,7 +29,7 @@ class UploadImageRequest extends FormRequest
                 'file',
                 'image',
                 'mimes:jpeg,png,gif',
-                'max:200', //200KB
+                //'max:200', //200KB
             ],
         ];
     }
