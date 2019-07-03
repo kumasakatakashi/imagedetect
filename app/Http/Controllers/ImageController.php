@@ -12,7 +12,7 @@ use App\Services\OcrService;
 class ImageController extends Controller
 {
     /**
-     * @var App\Services\OcrService
+     * @var App\Services\OcrServiceContract
      */
     protected $ocrService;
     
@@ -62,14 +62,13 @@ class ImageController extends Controller
         // OCR実行
         $text = $this->ocrService->detect($filepath);
         
-        $message = new \Illuminate\Support\MessageBag();
         if (empty($text)) {
-            $message->add('filepath', '画像内に認識可能な文字がありません');
+            session()->flash('warning', '画像内に認識可能な文字がありません');
         }
         
         return view('image.index')->with([
             'filepath' => $filepath,
             'result_text' => $text
-        ])->withErrors($message);
+        ]);
     }
 }
