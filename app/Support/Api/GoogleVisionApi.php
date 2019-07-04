@@ -35,7 +35,6 @@ class GoogleVisionApi
                         "features" => [
                             [
                                 "type" => "DOCUMENT_TEXT_DETECTION" ,
-                                "maxResults" => 10 ,
                             ],
                         ],
                     ],
